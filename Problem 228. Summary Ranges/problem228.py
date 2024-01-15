@@ -2,23 +2,32 @@ from typing import List
 
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
-        a = 0
-        b = 0
 
-        temp = set()
-        ta = []
+        l = 0
+        r = 0
 
-        for b in range(1, len(nums)):
-            if nums[b] == (nums[b-1] + 1):
-                temp.add(nums[b-1])
-                temp.add(nums[b])
-            if nums[b] != (nums[b-1] + 1):
-                ta.append(temp)
-                ta.append({nums[b]})
-                temp = set()
+        temp = []
+
+        i = 1
+
+        while i in range(1, len(nums)+1):
+            l = nums[i-1]
+            print(f'l:{l}')
+            while i in range(1, len(nums)) and nums[i-1] == (nums[i] - 1):
+                i += 1
+
+            r = nums[i-1]
+
+            if l == r:
+                temp.append(str(l))
+                print(f'r:{r}')
+            else:
+                temp.append(str(l) + '->' + str(r))
+            i += 1
+            
+        return temp
            
 
-        return ta
 
 
 sol = Solution()
