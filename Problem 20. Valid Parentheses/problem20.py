@@ -2,24 +2,34 @@ class Solution:
     def isValid(self, s: str) -> bool:
         
         pts = {'{':'}', '[':']', '(':')'}
+        ptc = {'}':'{', ']':'[', ')':'('}
 
-        i = 0
-        n = len(s) - 1
+        stack = []
 
-        while i <= n:
-            if pts[s[i]] == s[n]:
-                i += 1
-                n -= 1
-            else:
-                return False
+        for i in s:
+            if i in pts.keys():
+                stack.append(i)
+            if i in pts.values():
+                if not stack:
+                    return False
+                elif stack.pop() != ptc[i]:
+                    return False
+                else:
+                    continue
+            
+        if not stack:
+            return True
+        else:
+            return False
 
-        return True
+                    
+
             
 
     
 
 sol = Solution()
 
-s = "(]"
+s = "(){}"
 
 print(sol.isValid(s))
