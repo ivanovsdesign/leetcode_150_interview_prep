@@ -1,32 +1,42 @@
 class Solution:
     def find_num(self, s: str):
+        i = 0
         num = ''
-        stop = 0
-        for i, k in enumerate(s):
-            if k.isdigit():
-                num += k
-                stop = i+1
+        if s[i].isdigit():
+            while i < len(s) and s[i].isdigit():
+                num += s[i]
+                i += 1
+        
+        return (int(num), s[i:])  if num else (0,s)
+        
+    def find_sign(self, s: str):
+        i = 0
 
-        return int(num), s[stop:]
-    
-    def find_sign(self, s):
-        for i in s:
-            if i in ['+', '-']:
-                if i == '+':
-                    return 1
-                if i == '-': return -1
+        while i < len(s) and s[i] not in ['+', '-']:
+            i += 1
+        
+        if s[i] == '+':
+            return 1, s[(i+1):]
+        if s[i] == '-':
+            return -1, s[(i+1):]
+        
 
     def calculate(self, s: str) -> int:
-        l, next = self.find_num(s)
-        r, _ = self.find_num(next)
-        result = l + self.find_sign(next) * r
-
+        s = s.replace(' ', '')
+        l, nxt = self.find_num(s)
+        print(f'l:{l}, next:{nxt}')
+        sign, nxt = self.find_sign(nxt)
+        print(f'sign:{sign}, next:{nxt}')
+        r, nxt = self.find_num(nxt)
+        print(f'r:{r}, next:{nxt}')
+        result = l + (r * sign)
 
         return result
 
     
-s = "21 + 2"
+s = "21 - 2"
 
 solution = Solution()
-
 print(solution.calculate(s))
+
+#print(solution.calculate(s))
