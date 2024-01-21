@@ -2,38 +2,25 @@ from typing import List
 
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
-        
-        row = 0
-        col = 0
-        sm = []
+        if not matrix or not matrix[0]:
+            return 0
 
-        # searching for the first element
+        rows, cols = len(matrix), len(matrix[0])
 
-        element = min(matrix[row])
-        sm.append(element)
-        col = matrix[row].index(element)
-        row += 1
+        # Create a copy of the matrix to store intermediate results
+        dp = [[0] * cols for _ in range(rows)]
+        dp[0] = matrix[0]  # The first row is the same as the input matrix
 
-        
+        # Iterate through the matrix starting from the second row
+        for i in range(1, rows):
+            for j in range(cols):
+                # Find the minimum sum from the previous row considering adjacent elements
+                dp[i][j] = matrix[i][j] + min(dp[i-1][max(0, j-1):min(cols, j+2)])
 
-        # searching for the second element, minimal sum
-        while row < len(matrix):
-            if col > 0 and col < len(matrix[row]):
-                boundaries = matrix[row][(col-1):(col+2)]
-            elif col == 0:
-                boundaries = matrix[row][col:(col+2)]
-            else:
-                boundaries = matrix[row][(col-1):col]
-            
-            if boundaries:
-                element = min(boundaries)
-                sm.append(element)
-                col = matrix[row].index(element)
-                row += 1
-            else:
-                break 
-        
-        return sum(sm)
+        # The result is the minimum value in the last row
+        return min(dp[-1])
+
+
         
         
 solution = Solution()
