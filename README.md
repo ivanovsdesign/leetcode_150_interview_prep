@@ -40,9 +40,9 @@ Most of the solutions follows neetcode.io examples
 
 ## Getting Started 🚀
 
-1. Clone the repository: `git clone https://github.com/your-username/leetcode-interview-prep.git`
+1. Clone the repository: `git clone https://github.com/ivanovsdesign/leetcode_150_interview_prep`
 2. Navigate to the problem category of your choice.
 3. Explore the solutions and explanations!
 
 ```bash
-cd leetcode-interview-prep/Arrays
+cd leetcode_150_interview_prep
