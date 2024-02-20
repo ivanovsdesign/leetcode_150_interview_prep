@@ -24,11 +24,20 @@ Constraints:
 -231 <= n <= 231 - 1
 '''
 
-import numpy as np
+import math
 
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        if n == 0:
+        if n == 1:
+            return True
+        
+        if n == 0 or n % 2 == 1:
+            return False
+        
+        return True if math.log2(n) % 1 == 0 else False
+    
+    def isPowerOfTwoCycle(self, n: int) -> bool:
+        if n <= 0:
             return False
         
         if n == 1:
